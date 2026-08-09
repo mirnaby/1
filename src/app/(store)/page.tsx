@@ -11,7 +11,7 @@ export default async function HomePage() {
   ]);
   const whatsappDigits = settings.whatsappNumber.replace(/\D/g, "");
   const whatsappLink = whatsappDigits
-    ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent("مرحباً، أريد الاستفسار عن منتجات لمسة")}`
+    ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent("مرحباً، أريد الاستفسار عن منتجات ميرنا بيوتي")}`
     : null;
 
   return (
@@ -139,7 +139,7 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-3xl bg-gradient-to-l from-brand-700 via-brand-600 to-brand-500 px-8 py-14 text-center text-white sm:px-16">
           <h2 className="font-heading text-2xl font-bold sm:text-3xl">
-            انضمي إلى نادي لمسة
+            انضمي إلى نادي ميرنا بيوتي
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-sm leading-7 text-brand-50 sm:text-base">
             كوني أول من يعلم بالمنتجات الجديدة والعروض الحصرية والخصومات الخاصة

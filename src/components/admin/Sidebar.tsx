@@ -29,7 +29,7 @@ export function Sidebar() {
           ✿
         </span>
         <div>
-          <p className="font-heading text-base font-bold">لمسة</p>
+          <p className="font-heading text-base font-bold">ميرنا بيوتي</p>
           <p className="text-[11px] text-white/50">لوحة التحكم</p>
         </div>
       </div>

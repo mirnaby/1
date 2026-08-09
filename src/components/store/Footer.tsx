@@ -15,12 +15,12 @@ export async function Footer() {
               ✿
             </span>
             <span className="font-heading text-xl font-bold text-brand-800">
-              لمسة
+              ميرنا بيوتي
             </span>
           </div>
           <p className="mt-3 text-sm leading-6 text-ink-500">
             متجرك الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور. جمال طبيعي
-            يبدأ بلمسة واحدة.
+            يبدأ من هنا.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export async function Footer() {
         </div>
       </div>
       <div className="border-t border-brand-100 py-5 text-center text-xs text-ink-500">
-        © {new Date().getFullYear()} لمسة. جميع الحقوق محفوظة.
+        © {new Date().getFullYear()} ميرنا بيوتي. جميع الحقوق محفوظة.
       </div>
     </footer>
   );

@@ -15,7 +15,7 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = {
-  title: "لمسة | متجر مستحضرات التجميل",
+  title: "ميرنا بيوتي | متجر مستحضرات التجميل",
   description: "متجرك الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور",
 };
 

@@ -18,7 +18,7 @@ export function Header() {
             ✿
           </span>
           <span className="font-heading text-xl font-bold text-brand-800">
-            لمسة
+            ميرنا بيوتي
           </span>
         </Link>
 
