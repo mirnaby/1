@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ميرنا بيوتي | متجر مستحضرات التجميل</title>
+<meta name="description" content="متجر ميرنا بيوتي الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <span class="brand-badge">✿</span>
+      <span class="brand-name">ميرنا بيوتي</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">الرئيسية</a>
+      <a href="products.html">كل المنتجات</a>
+      <a href="products.html?category=skincare">العناية بالبشرة</a>
+      <a href="products.html?category=makeup">المكياج</a>
+      <a href="products.html?category=perfumes">العطور</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" aria-label="السلة">🛍️<span id="cart-badge" class="cart-badge" hidden>0</span></a>
+    </div>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">كل المنتجات</a>
+    <a href="products.html?category=skincare">العناية بالبشرة</a>
+    <a href="products.html?category=makeup">المكياج</a>
+    <a href="products.html?category=perfumes">العطور</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-blob a"></div>
+    <div class="hero-blob b"></div>
+    <div class="hero-content">
+      <span class="eyebrow">✨ جمالكِ يستحق الأفخر مع ميرنا بيوتي</span>
+      <h1 class="hero-title">اكتشفي عالماً من الجمال<span> والعناية الفاخرة</span></h1>
+      <p class="hero-desc">مستحضرات تجميل وعناية بالبشرة والشعر وعطور مختارة بعناية لتمنحكِ إشراقة طبيعية تدوم.</p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn btn-primary">تسوقي الآن ←</a>
+        <a href="products.html?category=perfumes" class="btn btn-outline">تصفحي العطور</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-strip">
+    <div class="container feature-grid">
+      <div class="feature-item">
+        <span class="feature-icon">🚚</span>
+        <div><p class="feature-title">شحن سريع</p><p class="feature-desc">توصيل خلال 2-4 أيام لجميع المدن</p></div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🛡️</span>
+        <div><p class="feature-title">منتجات أصلية</p><p class="feature-desc">ضمان الجودة على كل قطعة</p></div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎁</span>
+        <div><p class="feature-title">تغليف فاخر</p><p class="feature-desc">تغليف أنيق مع كل طلب</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">تسوقي حسب الفئة</h2>
+        <p class="section-sub">كل ما تحتاجينه في مكان واحد</p>
+      </div>
+    </div>
+    <div id="category-grid" class="grid cat-grid"></div>
+  </section>
+
+  <section style="background:#fff" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">الأكثر تميزاً</h2>
+          <p class="section-sub">مختارات مميزة يعشقها عملاؤنا</p>
+        </div>
+        <a href="products.html" class="section-link">عرض الكل ←</a>
+      </div>
+      <div id="featured-grid" class="grid product-grid cols-4"></div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="newsletter">
+      <h2>انضمي إلى نادي ميرنا بيوتي</h2>
+      <p>كوني أول من يعلم بالمنتجات الجديدة والعروض الحصرية والخصومات الخاصة بعملائنا المميزين.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" required placeholder="بريدك الإلكتروني" />
+        <button type="submit">اشتركي الآن</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="brand"><span class="brand-badge">✿</span><span class="brand-name">ميرنا بيوتي</span></div>
+      <p>متجرك الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور. جمالكِ يستحق الأفضل مع ميرنا بيوتي.</p>
+    </div>
+    <div class="footer-col">
+      <h4>تسوقي</h4>
+      <ul>
+        <li><a href="products.html?category=skincare">العناية بالبشرة</a></li>
+        <li><a href="products.html?category=makeup">المكياج</a></li>
+        <li><a href="products.html?category=haircare">العناية بالشعر</a></li>
+        <li><a href="products.html?category=perfumes">العطور</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>خدمة العملاء</h4>
+      <ul>
+        <li><a href="returns.html">سياسة الاستبدال والاسترجاع</a></li>
+        <li><a href="shipping.html">الشحن والتوصيل</a></li>
+        <li><a href="contact.html">تواصلي معنا</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تواصلي معنا</h4>
+      <p>support@mirnabeauty.sa</p>
+      <p>920000000</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="footer-year"></span> ميرنا بيوتي. جميع الحقوق محفوظة.</div>
+</footer>
+
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/cart.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  const catGrid = document.getElementById("category-grid");
+  catGrid.innerHTML = CATEGORIES.map((c) =>
+    '<a class="cat-card" href="products.html?category=' + c.slug + '">' +
+    '<span class="cat-emoji">' + c.emoji + '</span>' +
+    '<span class="cat-name">' + c.name + '</span>' +
+    '<span class="cat-count">' + categoryProductCount(c.slug) + ' منتج</span>' +
+    '</a>'
+  ).join("");
+
+  const featuredGrid = document.getElementById("featured-grid");
+  const featured = PRODUCTS.filter((p) => p.featured).slice(0, 8);
+  featuredGrid.innerHTML = featured.map(productCardHtml).join("");
+  bindQuickAddButtons(featuredGrid);
+</script>
+</body>
+</html>

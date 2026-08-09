@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تأكيد الطلب | ميرنا بيوتي</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <span class="brand-badge">✿</span>
+      <span class="brand-name">ميرنا بيوتي</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">الرئيسية</a>
+      <a href="products.html">كل المنتجات</a>
+      <a href="products.html?category=skincare">العناية بالبشرة</a>
+      <a href="products.html?category=makeup">المكياج</a>
+      <a href="products.html?category=perfumes">العطور</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" aria-label="السلة">🛍️<span id="cart-badge" class="cart-badge" hidden>0</span></a>
+    </div>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">كل المنتجات</a>
+    <a href="products.html?category=skincare">العناية بالبشرة</a>
+    <a href="products.html?category=makeup">المكياج</a>
+    <a href="products.html?category=perfumes">العطور</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container section" id="confirm-root"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="brand"><span class="brand-badge">✿</span><span class="brand-name">ميرنا بيوتي</span></div>
+      <p>متجرك الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور. جمالكِ يستحق الأفضل مع ميرنا بيوتي.</p>
+    </div>
+    <div class="footer-col">
+      <h4>تسوقي</h4>
+      <ul>
+        <li><a href="products.html?category=skincare">العناية بالبشرة</a></li>
+        <li><a href="products.html?category=makeup">المكياج</a></li>
+        <li><a href="products.html?category=haircare">العناية بالشعر</a></li>
+        <li><a href="products.html?category=perfumes">العطور</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>خدمة العملاء</h4>
+      <ul>
+        <li><a href="returns.html">سياسة الاستبدال والاسترجاع</a></li>
+        <li><a href="shipping.html">الشحن والتوصيل</a></li>
+        <li><a href="contact.html">تواصلي معنا</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تواصلي معنا</h4>
+      <p>support@mirnabeauty.sa</p>
+      <p>920000000</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="footer-year"></span> ميرنا بيوتي. جميع الحقوق محفوظة.</div>
+</footer>
+
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/cart.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  const requestedNumber = new URLSearchParams(location.search).get("order");
+  const root = document.getElementById("confirm-root");
+  let order = null;
+  try {
+    order = JSON.parse(localStorage.getItem("mirna-beauty-last-order") || "null");
+  } catch {}
+
+  if (!order || (requestedNumber && order.orderNumber !== requestedNumber)) {
+    root.innerHTML =
+      '<div style="text-align:center;padding:5rem 1rem">' +
+      '<h1 class="page-title">لم يتم العثور على الطلب</h1>' +
+      '<a href="products.html" class="btn btn-primary" style="margin-top:1.5rem">متابعة التسوق</a>' +
+      "</div>";
+  } else {
+    const rows = order.items.map((item) =>
+      '<div class="confirm-item-row"><span>' + item.name + " × " + item.quantity + "</span>" +
+      "<span style=\"font-weight:600\">" + formatPrice(item.price * item.quantity) + "</span></div>"
+    ).join("");
+
+    const dateStr = new Date(order.createdAt).toLocaleDateString("ar-SA", {
+      year: "numeric", month: "long", day: "numeric",
+    });
+
+    root.innerHTML =
+      '<div class="confirm-wrap">' +
+      '<span class="confirm-icon">✓</span>' +
+      '<h1 class="page-title" style="margin-top:1.5rem">شكراً لكِ، تم استلام طلبكِ!</h1>' +
+      '<p style="margin-top:.5rem;color:var(--ink-500)">رقم الطلب <strong style="color:var(--brand-700)">' + order.orderNumber + "</strong> بتاريخ " + dateStr + "</p>" +
+      '<div class="confirm-box">' +
+      '<div class="confirm-status-row"><span style="color:var(--ink-500)">الحالة</span><span style="font-weight:600;color:var(--brand-700)">قيد الانتظار</span></div>' +
+      '<div class="confirm-items">' + rows + "</div>" +
+      '<div class="summary-total" style="margin-top:1rem"><span>الإجمالي</span><span class="price">' + formatPrice(order.total) + "</span></div>" +
+      "</div>" +
+      '<a href="products.html" class="btn btn-primary" style="margin-top:2rem">متابعة التسوق</a>' +
+      "</div>";
+  }
+</script>
+</body>
+</html>

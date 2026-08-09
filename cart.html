@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>سلة التسوق | ميرنا بيوتي</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <span class="brand-badge">✿</span>
+      <span class="brand-name">ميرنا بيوتي</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">الرئيسية</a>
+      <a href="products.html">كل المنتجات</a>
+      <a href="products.html?category=skincare">العناية بالبشرة</a>
+      <a href="products.html?category=makeup">المكياج</a>
+      <a href="products.html?category=perfumes">العطور</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" aria-label="السلة">🛍️<span id="cart-badge" class="cart-badge" hidden>0</span></a>
+    </div>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">كل المنتجات</a>
+    <a href="products.html?category=skincare">العناية بالبشرة</a>
+    <a href="products.html?category=makeup">المكياج</a>
+    <a href="products.html?category=perfumes">العطور</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container section" id="cart-root"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="brand"><span class="brand-badge">✿</span><span class="brand-name">ميرنا بيوتي</span></div>
+      <p>متجرك الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور. جمالكِ يستحق الأفضل مع ميرنا بيوتي.</p>
+    </div>
+    <div class="footer-col">
+      <h4>تسوقي</h4>
+      <ul>
+        <li><a href="products.html?category=skincare">العناية بالبشرة</a></li>
+        <li><a href="products.html?category=makeup">المكياج</a></li>
+        <li><a href="products.html?category=haircare">العناية بالشعر</a></li>
+        <li><a href="products.html?category=perfumes">العطور</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>خدمة العملاء</h4>
+      <ul>
+        <li><a href="returns.html">سياسة الاستبدال والاسترجاع</a></li>
+        <li><a href="shipping.html">الشحن والتوصيل</a></li>
+        <li><a href="contact.html">تواصلي معنا</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تواصلي معنا</h4>
+      <p>support@mirnabeauty.sa</p>
+      <p>920000000</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="footer-year"></span> ميرنا بيوتي. جميع الحقوق محفوظة.</div>
+</footer>
+
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/cart.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  function render() {
+    const items = Cart.read();
+    const root = document.getElementById("cart-root");
+
+    if (items.length === 0) {
+      root.innerHTML =
+        '<div class="empty-state">' +
+        '<span class="icon">🛍️</span>' +
+        '<h1 class="page-title">سلتك فارغة</h1>' +
+        '<p style="color:var(--ink-500)">أضيفي منتجات لتظهر هنا</p>' +
+        '<a href="products.html" class="btn btn-primary">تصفحي المنتجات</a>' +
+        "</div>";
+      return;
+    }
+
+    const rows = items.map((item) =>
+      '<li class="cart-item">' +
+      '<div class="product-visual cart-item-visual" style="' + gradientStyle(item.gradientFrom, item.gradientTo) + '">' + item.emoji + "</div>" +
+      '<div class="cart-item-info">' +
+      '<a class="cart-item-name" href="product.html?slug=' + encodeURIComponent(item.slug) + '">' + item.name + "</a>" +
+      '<span class="cart-item-price">' + formatPrice(item.price) + "</span>" +
+      '<div class="cart-item-qty">' +
+      '<button type="button" data-minus="' + item.productId + '">−</button>' +
+      '<span style="width:1.5rem;text-align:center;font-size:.875rem">' + item.quantity + "</span>" +
+      '<button type="button" data-plus="' + item.productId + '" ' + (item.quantity >= item.stock ? "disabled" : "") + ">+</button>" +
+      "</div></div>" +
+      '<div class="cart-item-end">' +
+      '<button type="button" class="cart-item-remove" data-remove="' + item.productId + '" aria-label="إزالة">✕</button>' +
+      '<span style="font-family:\'Cairo\',sans-serif;font-size:.875rem;font-weight:700">' + formatPrice(item.price * item.quantity) + "</span>" +
+      "</div></li>"
+    ).join("");
+
+    root.innerHTML =
+      '<h1 class="page-title" style="margin-bottom:2rem">سلة التسوق</h1>' +
+      '<div class="cart-layout">' +
+      '<ul>' + rows + "</ul>" +
+      '<div class="summary-box">' +
+      '<h2 class="summary-title">ملخص الطلب</h2>' +
+      '<div class="summary-row"><span>الإجمالي الفرعي</span><span>' + formatPrice(Cart.total(items)) + "</span></div>" +
+      '<div class="summary-row free"><span>الشحن</span><span>مجاني</span></div>' +
+      '<div class="summary-total"><span>الإجمالي</span><span class="price">' + formatPrice(Cart.total(items)) + "</span></div>" +
+      '<a href="checkout.html" class="btn btn-primary btn-block" style="margin-top:1.5rem">متابعة الدفع ←</a>' +
+      "</div></div>";
+
+    root.querySelectorAll("[data-minus]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-minus");
+        const item = Cart.read().find((i) => i.productId === id);
+        Cart.setQuantity(id, item.quantity - 1);
+        updateCartBadge();
+        render();
+      })
+    );
+    root.querySelectorAll("[data-plus]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-plus");
+        const item = Cart.read().find((i) => i.productId === id);
+        Cart.setQuantity(id, item.quantity + 1);
+        updateCartBadge();
+        render();
+      })
+    );
+    root.querySelectorAll("[data-remove]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        Cart.removeItem(btn.getAttribute("data-remove"));
+        updateCartBadge();
+        render();
+      })
+    );
+  }
+
+  render();
+</script>
+</body>
+</html>

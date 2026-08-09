@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title id="page-title">المنتج | ميرنا بيوتي</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <div class="container header-row">
+    <a href="index.html" class="brand">
+      <span class="brand-badge">✿</span>
+      <span class="brand-name">ميرنا بيوتي</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">الرئيسية</a>
+      <a href="products.html">كل المنتجات</a>
+      <a href="products.html?category=skincare">العناية بالبشرة</a>
+      <a href="products.html?category=makeup">المكياج</a>
+      <a href="products.html?category=perfumes">العطور</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn" aria-label="السلة">🛍️<span id="cart-badge" class="cart-badge" hidden>0</span></a>
+    </div>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">كل المنتجات</a>
+    <a href="products.html?category=skincare">العناية بالبشرة</a>
+    <a href="products.html?category=makeup">المكياج</a>
+    <a href="products.html?category=perfumes">العطور</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container section" id="product-root">
+    <p style="text-align:center;color:var(--ink-500)">جارٍ التحميل...</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="brand"><span class="brand-badge">✿</span><span class="brand-name">ميرنا بيوتي</span></div>
+      <p>متجرك الفاخر لمستحضرات التجميل والعناية بالبشرة والعطور. جمالكِ يستحق الأفضل مع ميرنا بيوتي.</p>
+    </div>
+    <div class="footer-col">
+      <h4>تسوقي</h4>
+      <ul>
+        <li><a href="products.html?category=skincare">العناية بالبشرة</a></li>
+        <li><a href="products.html?category=makeup">المكياج</a></li>
+        <li><a href="products.html?category=haircare">العناية بالشعر</a></li>
+        <li><a href="products.html?category=perfumes">العطور</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>خدمة العملاء</h4>
+      <ul>
+        <li><a href="returns.html">سياسة الاستبدال والاسترجاع</a></li>
+        <li><a href="shipping.html">الشحن والتوصيل</a></li>
+        <li><a href="contact.html">تواصلي معنا</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تواصلي معنا</h4>
+      <p>support@mirnabeauty.sa</p>
+      <p>920000000</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="footer-year"></span> ميرنا بيوتي. جميع الحقوق محفوظة.</div>
+</footer>
+
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/cart.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  const slug = new URLSearchParams(location.search).get("slug") || "";
+  const product = getProductBySlug(decodeURIComponent(slug));
+  const root = document.getElementById("product-root");
+
+  if (!product) {
+    root.innerHTML =
+      '<div style="text-align:center;padding:5rem 1rem">' +
+      '<h1 class="page-title">لم يتم العثور على المنتج</h1>' +
+      '<p class="page-desc" style="margin-inline:auto">قد يكون الرابط غير صحيح.</p>' +
+      '<a href="products.html" class="btn btn-primary" style="margin-top:1.5rem">العودة للمنتجات</a>' +
+      "</div>";
+  } else {
+    document.title = product.name + " | ميرنا بيوتي";
+    const category = getCategory(product.categorySlug);
+    const related = getRelatedProducts(product, 4);
+
+    const compareHtml = product.compareAtPrice
+      ? '<span style="font-size:1.1rem;color:var(--ink-500);text-decoration:line-through">' + formatPrice(product.compareAtPrice) + "</span>"
+      : "";
+
+    const stockHtml = product.stock > 0
+      ? '<span style="color:#059669">متوفر (' + product.stock + " قطعة)</span>"
+      : '<span style="color:#dc2626">غير متوفر</span>';
+
+    root.innerHTML =
+      '<nav class="breadcrumb">' +
+      '<a href="index.html">الرئيسية</a><span class="sep">/</span>' +
+      '<a href="products.html">المنتجات</a><span class="sep">/</span>' +
+      '<a href="products.html?category=' + category.slug + '">' + category.name + "</a>" +
+      "</nav>" +
+      '<div class="pd-grid">' +
+      '<div class="product-visual lg" style="' + gradientStyle(product.gradientFrom, product.gradientTo) + '">' + product.emoji + "</div>" +
+      "<div>" +
+      '<span style="font-size:.875rem;font-weight:600;color:var(--brand-600)">' + category.name + "</span>" +
+      '<h1 class="pd-title">' + product.name + "</h1>" +
+      '<div class="pd-meta">' +
+      '<span>⭐ <strong style="color:var(--ink-900)">' + product.rating.toFixed(1) + "</strong></span>" +
+      "<span>(" + product.reviewsCount + " تقييم)</span><span>·</span>" + stockHtml +
+      "</div>" +
+      '<div class="pd-price-row"><span class="pd-price">' + formatPrice(product.price) + "</span>" + compareHtml + "</div>" +
+      '<p class="pd-desc">' + product.description + "</p>" +
+      '<div class="pd-actions">' +
+      '<div class="qty-box">' +
+      '<button type="button" id="qty-minus">−</button>' +
+      '<span id="qty-value" style="width:1.5rem;text-align:center;font-size:.875rem">1</span>' +
+      '<button type="button" id="qty-plus">+</button>' +
+      "</div>" +
+      '<button type="button" id="add-to-cart" class="btn btn-primary">أضيفي للسلة</button>' +
+      "</div>" +
+      '<div class="pd-trust">' +
+      '<div>🚚 شحن سريع لجميع المدن</div><div>🛡️ منتج أصلي 100٪</div><div>🔄 استبدال خلال 14 يوم</div>' +
+      "</div>" +
+      "</div>" +
+      "</div>" +
+      (related.length
+        ? '<section style="margin-top:5rem"><h2 class="section-title" style="margin-bottom:1.5rem">قد يعجبكِ أيضاً</h2>' +
+          '<div class="grid product-grid cols-4">' + related.map(productCardHtml).join("") + "</div></section>"
+        : "");
+
+    let qty = 1;
+    const qtyValue = document.getElementById("qty-value");
+    document.getElementById("qty-minus").addEventListener("click", () => {
+      qty = Math.max(1, qty - 1);
+      qtyValue.textContent = qty;
+    });
+    document.getElementById("qty-plus").addEventListener("click", () => {
+      qty = Math.min(product.stock, qty + 1);
+      qtyValue.textContent = qty;
+    });
+    document.getElementById("add-to-cart").addEventListener("click", () => {
+      Cart.add(product, qty);
+      updateCartBadge();
+      showToast(product.name + " أُضيف إلى السلة");
+    });
+    bindQuickAddButtons(root);
+  }
+</script>
+</body>
+</html>
