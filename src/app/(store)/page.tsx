@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { ArrowLeft, Sparkles, Truck, ShieldCheck, Gift } from "lucide-react";
-import { getCategories, getFeaturedProducts } from "@/lib/data";
+import { getCategories, getFeaturedProducts, getStoreSettings } from "@/lib/data";
 import { ProductCard } from "@/components/store/ProductCard";
 
 export default async function HomePage() {
-  const [categories, featured] = await Promise.all([
+  const [categories, featured, settings] = await Promise.all([
     getCategories(),
     getFeaturedProducts(8),
+    getStoreSettings(),
   ]);
+  const whatsappDigits = settings.whatsappNumber.replace(/\D/g, "");
+  const whatsappLink = whatsappDigits
+    ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent("مرحباً، أريد الاستفسار عن منتجات لمسة")}`
+    : null;
 
   return (
     <div>
@@ -140,19 +145,20 @@ export default async function HomePage() {
             كوني أول من يعلم بالمنتجات الجديدة والعروض الحصرية والخصومات الخاصة
             بعملائنا المميزين.
           </p>
-          <form className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row">
-            <input
-              type="email"
-              placeholder="بريدك الإلكتروني"
-              className="flex-1 rounded-full border-0 px-5 py-3 text-sm text-ink-900 placeholder:text-ink-500 focus:outline-none focus:ring-2 focus:ring-gold-400"
-            />
-            <button
-              type="submit"
-              className="rounded-full bg-gold-500 px-6 py-3 text-sm font-bold text-ink-900 transition hover:bg-gold-400"
+          {whatsappLink ? (
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full bg-gold-500 px-7 py-3.5 text-sm font-bold text-ink-900 transition hover:bg-gold-400"
             >
-              اشتركي الآن
-            </button>
-          </form>
+              💬 تواصلي معنا عبر واتساب
+            </a>
+          ) : (
+            <p className="mx-auto mt-6 max-w-md text-xs text-brand-100">
+              لم يتم إضافة رقم واتساب بعد من لوحة التحكم
+            </p>
+          )}
         </div>
       </section>
     </div>
